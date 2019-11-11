@@ -4,6 +4,7 @@
  */
 export class Game {
   private total: number = 0;
+  public strikes: number = 0;
   //
   /**
   * Scores a frame.
@@ -11,14 +12,13 @@ export class Game {
   * @param {number} rollOne The first roll.
   * @param {number} rollTwo The second roll.
   */
-  public scoreFrame(rollOne: number, rollTwo: number): void {
+  public scoreFrame(rollOne: number, rollTwo: number = 0): void {
     const strike = 10;
     if (rollOne === strike) {
-      this.total += 5;
+      this.total += 15;
+      ++this.strikes;
     }
-    if (rollTwo === strike) {
-      this.total += 5;
-    }
+
     this.total += rollOne + rollTwo;
   }
   //
