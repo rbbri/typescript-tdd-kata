@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "lint": "./node_modules/.bin/eslint",
-    "fix": "./node_modules/.bin/eslint --fix"
+    "fix": "./node_modules/.bin/eslint --fix",
+    "watch": "jest --watch"
   },
   "keywords": [],
   "author": "",

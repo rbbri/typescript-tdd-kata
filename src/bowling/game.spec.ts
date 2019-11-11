@@ -27,6 +27,14 @@ describe('game', () => {
     expect(game.getScore()).toBe(20);
   });
 
+  test('it should score a game with one strike and the rest gutter balls', () => {
+    game.scoreFrame(10);
+    for (let i = 0; i < 9; ++i) {
+      game.scoreFrame(0, 0);
+    }
+    expect(game.getScore()).toBe(10);
+  })
+
 
   describe('a perfect game', () => {
 

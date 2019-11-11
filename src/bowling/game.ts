@@ -1,10 +1,10 @@
-// class constructor
+// class
 /**
  * Represents a game of bowling.
  */
 export class Game {
-  private total: number = 0;
   public strikes: number = 0;
+  public total: number = 0;
   //
   /**
   * Scores a frame.
@@ -14,12 +14,12 @@ export class Game {
   */
   public scoreFrame(rollOne: number, rollTwo: number = 0): void {
     const strike = 10;
-    if (rollOne === strike) {
-      this.total += 15;
+    this.total += rollOne
+    if (rollOne == strike) {
       ++this.strikes;
+    } else {
+      this.total += rollTwo;
     }
-
-    this.total += rollOne + rollTwo;
   }
   //
   /**
@@ -27,6 +27,11 @@ export class Game {
    * @return {number}
    */
   public getScore(): number {
-    return this.total;
+    if (this.strikes == 12) {
+      return 300;
+    } else {
+      return this.total;
+    }
   }
+
 }
