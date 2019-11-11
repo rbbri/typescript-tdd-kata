@@ -8,4 +8,13 @@ describe('game', () => {
     }
     expect(game.getScore()).toBe(0);
   })
+
+  test('it should score a game of all ones', () => {
+    let game: Game = new Game();
+    for (let i = 0; i < 10; ++i) {
+      game.scoreFrame(1, 1);
+    }
+    expect(game.getScore()).toBe(20);
+  })
+
 })
