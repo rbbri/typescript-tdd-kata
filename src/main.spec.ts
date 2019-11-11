@@ -1,3 +1,3 @@
-test("it should run tests", () => {
+test('it should run tests', () => {
 
-})
+});
