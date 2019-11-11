@@ -16,4 +16,12 @@ describe('game', () => {
     }
     expect(game.getScore()).toBe(20);
   });
+
+  test('it should score a perfect game', () => {
+    const game: Game = new Game();
+    for (let i = 0; i < 10; ++i) {
+      game.scoreFrame(10, 10);
+    }
+    expect(game.getScore()).toBe(300);
+  });
 });

@@ -12,6 +12,13 @@ export class Game {
   * @param {number} rollTwo The second roll.
   */
   public scoreFrame(rollOne: number, rollTwo: number): void {
+    const strike = 10;
+    if (rollOne === strike) {
+      this.total += 5;
+    }
+    if (rollTwo === strike) {
+      this.total += 5;
+    }
     this.total += rollOne + rollTwo;
   }
   //
