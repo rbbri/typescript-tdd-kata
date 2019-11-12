@@ -13,7 +13,19 @@ export class Game {
       if (previousFrame.isSpare()) {
         this.total += rollOne;
       }
+      if (previousFrame.isStrike()) {
+        this.total += rollOne;
+      }
+
+      if (this.currentFrame > 1) {
+        const frameBeforePreviousFrame = this.frames[this.currentFrame - 2];
+        if (frameBeforePreviousFrame.isStrike() && previousFrame.isStrike()) {
+          this.total += 30;
+        }
+      }
     }
+
+
 
     if (frame.isStrike()) {
       ++this.strikes;

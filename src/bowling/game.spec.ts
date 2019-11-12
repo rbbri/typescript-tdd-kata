@@ -35,7 +35,7 @@ describe('game', () => {
     expect(game.getScore()).toBe(10);
   });
 
-  test('it should score a game 10 (5,5) spares and a strike correctly', () => {
+  test('it should score a game 10 (5,5) spares and a strike', () => {
     // 10 frames of spares (9 * 15 + 10 = 145)
     for (let i = 0; i < 10; ++i) {
       game.scoreFrame(5, 5);
@@ -44,6 +44,16 @@ describe('game', () => {
     game.scoreFrame(10);
     expect(game.getScore()).toBe(155);
   });
+
+  test('it should score a game of a turkey, the rest gutter balls', () => {
+    for (let i = 0; i < 2; ++i) {
+      game.scoreFrame(10);
+    }
+    for (let i = 0; i < 6; ++i) {
+      game.scoreFrame(0, 0);
+    }
+    expect(game.getScore()).toBe(60);
+  })
 
   test('it should store the frames', () => {
     game.scoreFrame(0, 0);
