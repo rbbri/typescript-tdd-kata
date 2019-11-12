@@ -27,20 +27,43 @@ describe('game', () => {
     expect(game.getScore()).toBe(20);
   });
 
-  test('it should score a game with one strike and the rest gutter balls', () => {
+  test('it should score a game with one strike, the rest gutter balls', () => {
     game.scoreFrame(10);
     for (let i = 0; i < 9; ++i) {
       game.scoreFrame(0, 0);
     }
     expect(game.getScore()).toBe(10);
-  })
+  });
+
+  test('it should score a game 10 (5,5) spares and a strike correctly', () => {
+    // 10 frames of spares (9 * 15 + 10 = 145)
+    for (let i = 0; i < 10; ++i) {
+      game.scoreFrame(5, 5);
+    }
+    // bonus frame a strike (145 + 10 = 155)
+    game.scoreFrame(10);
+    expect(game.getScore()).toBe(155);
+  });
+
+  test('it should store the frames', () => {
+    game.scoreFrame(0, 0);
+    expect(game.frames.length).toBe(1);
+  });
+
+  test('it starts at frame 0', () => {
+    expect([game.frames.length, game.currentFrame]).toEqual([0, 0]);
+  });
+
+  test('it increments the currentFrame', () => {
+    game.scoreFrame(0, 0);
+    expect(game.currentFrame).toBe(1);
+  });
 
 
   describe('a perfect game', () => {
-
     beforeEach(() => {
       rollPerfectGame(game);
-    })
+    });
 
     test('it should consist of 12 strikes', () => {
       expect(game.strikes).toBe(12);

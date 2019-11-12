@@ -1,31 +1,36 @@
-// class
-/**
- * Represents a game of bowling.
- */
+import { Frame } from './frame';
+
 export class Game {
   public strikes: number = 0;
   public total: number = 0;
-  //
-  /**
-  * Scores a frame.
-  * @constructor
-  * @param {number} rollOne The first roll.
-  * @param {number} rollTwo The second roll.
-  */
+  public frames: Frame[] = [];
+  public currentFrame: number = 0;
+
   public scoreFrame(rollOne: number, rollTwo: number = 0): void {
-    const strike = 10;
-    this.total += rollOne
-    if (rollOne == strike) {
-      ++this.strikes;
-    } else {
-      this.total += rollTwo;
+    const frame = new Frame(rollOne, rollTwo);
+    if (this.currentFrame > 0) {
+      const previousFrame = this.frames[this.currentFrame - 1];
+      if (previousFrame.isSpare()) {
+        this.total += rollOne;
+      }
     }
+
+    if (frame.isStrike()) {
+      ++this.strikes;
+    }
+
+    if (this.currentFrame < 10) {
+      this.total += rollOne;
+      if (!frame.isStrike()) {
+        this.total += rollTwo;
+      }
+    }
+
+
+    this.frames.push(frame);
+    ++this.currentFrame;
   }
-  //
-  /**
-   * Returns the total score
-   * @return {number}
-   */
+
   public getScore(): number {
     if (this.strikes == 12) {
       return 300;
@@ -33,5 +38,4 @@ export class Game {
       return this.total;
     }
   }
-
 }
